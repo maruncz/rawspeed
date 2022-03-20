@@ -39,11 +39,11 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* Data, size_t Size) {
     const rawspeed::DataBuffer db(b, rawspeed::Endianness::little);
     rawspeed::ByteStream bs(db);
 
-    rawspeed::RawImage mRaw(CreateRawImage(bs));
+    auto mRaw(CreateRawImage(bs));
 
     rawspeed::ByteStream rawData = bs.getStream(bs.getRemainSize());
 
-    rawspeed::PanasonicDecompressorV6 p(mRaw, rawData);
+    rawspeed::PanasonicDecompressorV6 p(mRaw.get(), rawData);
     mRaw->createData();
     p.decompress();
 

@@ -63,7 +63,7 @@ class PanasonicDecompressorV5 final : public AbstractDecompressor {
   // Takes care of unsplitting&swapping back the block at sectionSplitOffset.
   class ProxyStream;
 
-  RawImage mRaw;
+  RawImageData* mRaw;
 
   // The full input buffer, containing all the blocks.
   ByteStream input;
@@ -98,7 +98,7 @@ class PanasonicDecompressorV5 final : public AbstractDecompressor {
   template <const PacketDsc& dsc> void decompressInternal() const noexcept;
 
 public:
-  PanasonicDecompressorV5(const RawImage& img, const ByteStream& input_,
+  PanasonicDecompressorV5(RawImageData* img, const ByteStream& input_,
                           uint32_t bps_);
 
   void decompress() const noexcept;
